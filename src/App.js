@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+
 
 function App() {
+
+  const [valor, setValor ] = useState(1);
+  const [contador, setContador] = useState (0);
+
+  function menos() {
+    if (contador >= 1) {
+      setContador(contador-valor);
+    }
+  }
+
+  function mais() {
+    if (contador <= 9) {
+      setContador(contador + parseInt(valor))
+    }
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input 
+        type="text" 
+        value = {valor}
+        onChange={(event) => setValor(event.target.value)}  
+        placeholder="digite valor" 
+      />
+      <button disabled={contador>=10} onClick={mais}>Soma</button>
+      <button disabled={contador<=0} onClick={menos}>Diminuição</button>
+      <p>Resultado das somas: {contador}</p>
     </div>
   );
 }
